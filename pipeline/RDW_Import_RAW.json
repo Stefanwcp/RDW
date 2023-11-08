@@ -1,0 +1,9 @@
+{
+	"name": "RDW_Import_RAW",
+	"properties": {
+		"folder": {
+			"name": "RDW"
+		},
+		"annotations": []
+	}
+}
