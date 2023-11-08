@@ -35,6 +35,16 @@
 				]
 			}
 		],
+		"parameters": {
+			"object": {
+				"type": "string",
+				"defaultValue": "m9d7-ebf2.json"
+			},
+			"XAppToken": {
+				"type": "string",
+				"defaultValue": "miF09EtQWnRrBx3eEVcQ2liRp"
+			}
+		},
 		"folder": {
 			"name": "RDW"
 		},
