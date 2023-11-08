@@ -5,6 +5,11 @@
 			"referenceName": "HTTP_RDW",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"object": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
