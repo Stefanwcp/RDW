@@ -1,0 +1,9 @@
+{
+	"name": "RDW-DEV",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "13d62651-83cf-4f53-a80a-9aac805c29d3",
+		"tenantId": "971693a7-87a1-4ae7-b38b-fb907dc864e9"
+	}
+}
