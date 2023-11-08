@@ -1,0 +1,21 @@
+{
+	"name": "RDW_Raw_CSV",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "HTTP_RDW",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
