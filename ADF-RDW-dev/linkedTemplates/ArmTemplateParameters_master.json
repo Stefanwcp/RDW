@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "ADF-RDW-dev"
+		},
+		"AzureDataLakeStorage_RDW_accountKey": {
+			"value": ""
+		},
+		"AzureDataLakeStorage_RDW_properties_typeProperties_url": {
+			"value": "https://datalakestoragegenrdwdev.dfs.core.windows.net/"
+		},
+		"HTTP_RDW_properties_typeProperties_url": {
+			"value": "https://opendata.rdw.nl/resource/"
+		},
+		"LS_AKV_dev_RDW_properties_typeProperties_baseUrl": {
+			"value": "https://RDW-DEV.vault.azure.net/"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
