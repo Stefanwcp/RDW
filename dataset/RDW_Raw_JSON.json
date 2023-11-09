@@ -5,6 +5,12 @@
 			"referenceName": "HTTP_RDW",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"RelativeUrl": {
+				"type": "string",
+				"defaultValue": "object"
+			}
+		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {
