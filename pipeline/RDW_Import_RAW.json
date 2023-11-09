@@ -19,7 +19,11 @@
 						"type": "JsonSource",
 						"storeSettings": {
 							"type": "HttpReadSettings",
-							"requestMethod": "GET"
+							"requestMethod": "GET",
+							"additionalHeaders": {
+								"value": "@{pipeline().parameters.XAppToken}",
+								"type": "Expression"
+							}
 						},
 						"formatSettings": {
 							"type": "JsonReadSettings"
@@ -42,7 +46,13 @@
 				"inputs": [
 					{
 						"referenceName": "RDW_Raw_JSON",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"RelativeUrl": {
+								"value": "@pipeline().parameters.object",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"outputs": [
