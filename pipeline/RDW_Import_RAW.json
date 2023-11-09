@@ -5,6 +5,8 @@
 			{
 				"name": "Fetch RDW CSV",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -61,6 +63,23 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Set Timestamp for file",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "TimestampForFile",
+					"value": {
+						"value": "@utcnow()",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"parameters": {
@@ -71,6 +90,17 @@
 			"XAppToken": {
 				"type": "string",
 				"defaultValue": "0LK235hN8zkXw8RR62aPNdAVt"
+			}
+		},
+		"variables": {
+			"DefinedFolder": {
+				"type": "String"
+			},
+			"TimestampForFile": {
+				"type": "String"
+			},
+			"RawFolder": {
+				"type": "String"
 			}
 		},
 		"folder": {
