@@ -1,0 +1,10 @@
+{
+	"name": "LS_AKV_dev_RDW",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://RDW-DEV.vault.azure.net/"
+		}
+	}
+}
