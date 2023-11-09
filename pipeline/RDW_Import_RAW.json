@@ -21,7 +21,7 @@
 							"type": "HttpReadSettings",
 							"requestMethod": "GET",
 							"additionalHeaders": {
-								"value": "Host: opendata.rdw.nl\nAccept: application/json\nX-App-Token: 0LK235hN8zkXw8RR62aPNdAVt",
+								"value": "X-App-Token: 0LK235hN8zkXw8RR62aPNdAVt",
 								"type": "Expression"
 							}
 						},
@@ -61,33 +61,6 @@
 						"type": "DatasetReference"
 					}
 				]
-			},
-			{
-				"name": "Web1",
-				"type": "WebActivity",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"url": {
-						"value": "@concat('https://opendata.rdw.nl/resource/',pipeline().parameters.object)",
-						"type": "Expression"
-					},
-					"method": "GET",
-					"headers": {
-						"Accept": "application/json",
-						"X-App-Token": "0LK235hN8zkXw8RR62aPNdAVt",
-						"Host": "opendata.rdw.nl"
-					}
-				}
 			}
 		],
 		"parameters": {
