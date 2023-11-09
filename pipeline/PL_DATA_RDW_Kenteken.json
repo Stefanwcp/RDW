@@ -40,7 +40,7 @@
 							"type": "HttpReadSettings",
 							"requestMethod": "GET",
 							"additionalHeaders": {
-								"value": "@{concat('X-App-Token: ',activity('Get X-App-Token for RDW data').output)}",
+								"value": "@{concat('X-App-Token: ',activity('Get X-App-Token for RDW data').output.value)}",
 								"type": "Expression"
 							},
 							"requestTimeout": ""
