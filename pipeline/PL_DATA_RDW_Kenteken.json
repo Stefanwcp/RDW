@@ -206,7 +206,7 @@
 					"method": "GET",
 					"authentication": {
 						"type": "MSI",
-						"resource": "a"
+						"resource": ""
 					}
 				}
 			},
