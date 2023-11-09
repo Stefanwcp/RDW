@@ -5,10 +5,10 @@
 		"factoryName": {
 			"value": "ADF-RDW-dev"
 		},
-		"AzureDataLakeStorage_RDW_accountKey": {
+		"ADLS_RDW_accountKey": {
 			"value": ""
 		},
-		"AzureDataLakeStorage_RDW_properties_typeProperties_url": {
+		"ADLS_RDW_properties_typeProperties_url": {
 			"value": "https://datalakestoragegenrdwdev.dfs.core.windows.net/"
 		},
 		"HTTP_RDW_properties_typeProperties_url": {

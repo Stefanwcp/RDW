@@ -7,11 +7,11 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "ADF-RDW-dev"
 		},
-		"AzureDataLakeStorage_RDW_accountKey": {
+		"ADLS_RDW_accountKey": {
 			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage_RDW'"
+			"metadata": "Secure string for 'accountKey' of 'ADLS_RDW'"
 		},
-		"AzureDataLakeStorage_RDW_properties_typeProperties_url": {
+		"ADLS_RDW_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://datalakestoragegenrdwdev.dfs.core.windows.net/"
 		},
@@ -29,17 +29,17 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStorage_RDW')]",
+			"name": "[concat(parameters('factoryName'), '/ADLS_RDW')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"type": "AzureBlobFS",
 				"typeProperties": {
-					"url": "[parameters('AzureDataLakeStorage_RDW_properties_typeProperties_url')]",
+					"url": "[parameters('ADLS_RDW_properties_typeProperties_url')]",
 					"accountKey": {
 						"type": "SecureString",
-						"value": "[parameters('AzureDataLakeStorage_RDW_accountKey')]"
+						"value": "[parameters('ADLS_RDW_accountKey')]"
 					}
 				}
 			},
@@ -79,7 +79,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureDataLakeStorage_RDW",
+					"referenceName": "ADLS_RDW",
 					"type": "LinkedServiceReference"
 				},
 				"parameters": {
@@ -116,7 +116,7 @@
 				"schema": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage_RDW')]"
+				"[concat(variables('factoryId'), '/linkedServices/ADLS_RDW')]"
 			]
 		},
 		{
