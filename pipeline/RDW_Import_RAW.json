@@ -181,7 +181,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"url": "https://rdw-dev.vault.azure.net/",
+					"url": "https://rdw-dev.vault.azure.net/secrets/RDW-X-App-Token/e7eca6865c66414fab63c5db5a611609",
 					"method": "GET",
 					"authentication": {
 						"type": "MSI"
@@ -223,7 +223,8 @@
 				"defaultValue": "0LK235hN8zkXw8RR62aPNdAVt"
 			},
 			"Entity": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "rdw"
 			}
 		},
 		"variables": {
