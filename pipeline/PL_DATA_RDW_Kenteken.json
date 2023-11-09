@@ -155,7 +155,10 @@
 				"userProperties": [],
 				"typeProperties": {
 					"variableName": "RawFolder",
-					"value": ""
+					"value": {
+						"value": "@concat(pipeline().parameters.Entity,variables('TimestampForFile'))",
+						"type": "Expression"
+					}
 				}
 			},
 			{
