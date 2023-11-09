@@ -42,9 +42,10 @@
 							"type": "HttpReadSettings",
 							"requestMethod": "GET",
 							"additionalHeaders": {
-								"value": "X-App-Token: 0LK235hN8zkXw8RR62aPNdAVt",
+								"value": "@{concat('X-App-Token: ',activity('Get X-App-Token for RDW data').output)}",
 								"type": "Expression"
-							}
+							},
+							"requestTimeout": ""
 						},
 						"formatSettings": {
 							"type": "JsonReadSettings"
