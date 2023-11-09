@@ -16,13 +16,13 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "DelimitedTextSource",
+						"type": "JsonSource",
 						"storeSettings": {
 							"type": "HttpReadSettings",
 							"requestMethod": "GET"
 						},
 						"formatSettings": {
-							"type": "DelimitedTextReadSettings"
+							"type": "JsonReadSettings"
 						}
 					},
 					"sink": {
@@ -37,26 +37,12 @@
 							"fileExtension": ".txt"
 						}
 					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"typeConversion": true,
-						"typeConversionSettings": {
-							"allowDataTruncation": true,
-							"treatBooleanAsNumber": false
-						}
-					}
+					"enableStaging": false
 				},
 				"inputs": [
 					{
-						"referenceName": "RDW_Raw_CSV",
-						"type": "DatasetReference",
-						"parameters": {
-							"object": {
-								"value": "@pipeline().parameters.object",
-								"type": "Expression"
-							}
-						}
+						"referenceName": "RDW_Raw_JSON",
+						"type": "DatasetReference"
 					}
 				],
 				"outputs": [

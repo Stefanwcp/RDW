@@ -1,0 +1,17 @@
+{
+	"name": "RDW_Raw_JSON",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "HTTP_RDW",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation"
+			}
+		},
+		"schema": {}
+	}
+}
