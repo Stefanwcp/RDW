@@ -1,5 +1,5 @@
 {
-	"name": "DelimitedText1",
+	"name": "DS_RDW_Raw",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureDataLakeStorage_RDW",
