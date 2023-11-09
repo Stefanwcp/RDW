@@ -2,7 +2,7 @@
 	"name": "DS_RDW_Raw",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureDataLakeStorage_RDW",
+			"referenceName": "ADLS_RDW",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
