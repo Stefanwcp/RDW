@@ -84,6 +84,10 @@
 							"folder": {
 								"value": "@variables('RawFolder')",
 								"type": "Expression"
+							},
+							"file": {
+								"value": "@variables('FileName')",
+								"type": "Expression"
 							}
 						}
 					}
@@ -179,7 +183,10 @@
 				"userProperties": [],
 				"typeProperties": {
 					"variableName": "FileName",
-					"value": ""
+					"value": {
+						"value": "@concat(pipeline().parameters.object,variables('TimestampForFile'),variables('RunID'))",
+						"type": "Expression"
+					}
 				}
 			},
 			{
