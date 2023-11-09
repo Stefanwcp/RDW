@@ -206,7 +206,7 @@
 					"method": "GET",
 					"authentication": {
 						"type": "MSI",
-						"resource": ""
+						"resource": "https://vault.azure.net"
 					}
 				}
 			},
