@@ -238,7 +238,7 @@
 			}
 		],
 		"parameters": {
-			"object": {
+			"DatasetIdentifier": {
 				"type": "string",
 				"defaultValue": "m9d7-ebf2.json"
 			},
