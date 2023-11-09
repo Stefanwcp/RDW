@@ -15,7 +15,11 @@
 		"type": "Json",
 		"typeProperties": {
 			"location": {
-				"type": "HttpServerLocation"
+				"type": "HttpServerLocation",
+				"relativeUrl": {
+					"value": "@dataset().RelativeUrl",
+					"type": "Expression"
+				}
 			}
 		},
 		"schema": {}
