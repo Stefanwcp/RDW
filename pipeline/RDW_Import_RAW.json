@@ -84,10 +84,7 @@
 					"method": "GET",
 					"headers": {
 						"Accept": "application/json",
-						"X-App-Token": {
-							"value": "@pipeline().parameters.XAppToken",
-							"type": "Expression"
-						},
+						"X-App-Token": "miF09EtQWnRrBx3eEVcQ2liRp",
 						"Host": "opendata.rdw.nl"
 					}
 				}
