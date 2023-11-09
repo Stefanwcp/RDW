@@ -5,8 +5,6 @@
 			{
 				"name": "Fetch RDW CSV",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Set Raw Folder name",
