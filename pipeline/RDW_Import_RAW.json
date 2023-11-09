@@ -76,7 +76,7 @@
 				"typeProperties": {
 					"variableName": "TimestampForFile",
 					"value": {
-						"value": "@utcnow()",
+						"value": "@formatDateTime(utcNow(),'yyyy-MM-dd hh:mm:ss')",
 						"type": "Expression"
 					}
 				}
