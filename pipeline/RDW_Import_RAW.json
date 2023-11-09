@@ -5,6 +5,8 @@
 			{
 				"name": "Fetch RDW CSV",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -61,6 +63,34 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Web1",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@concat('https://opendata.rdw.nl/resource/',pipeline().parameters.object)",
+						"type": "Expression"
+					},
+					"method": "GET",
+					"headers": {
+						"Accept": "application/json",
+						"X-App-Token": {
+							"value": "@pipeline().parameters.XAppToken",
+							"type": "Expression"
+						},
+						"Host": "opendata.rdw.nl"
+					}
+				}
 			}
 		],
 		"parameters": {
