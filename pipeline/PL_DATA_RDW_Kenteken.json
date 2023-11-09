@@ -1,5 +1,5 @@
 {
-	"name": "RDW_Import_RAW",
+	"name": "PL_DATA_RDW_Kenteken",
 	"properties": {
 		"activities": [
 			{
@@ -128,7 +128,14 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "DefinedFolder",
+					"value": {
+						"value": "@concat(pipeline().parameters.Entity,variables('TimestampForFile'))",
+						"type": "Expression"
+					}
+				}
 			},
 			{
 				"name": "Set Raw Folder name",
@@ -145,7 +152,11 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "RawFolder",
+					"value": ""
+				}
 			},
 			{
 				"name": "Set File Name",
@@ -224,7 +235,7 @@
 			},
 			"Entity": {
 				"type": "string",
-				"defaultValue": "rdw"
+				"defaultValue": "kenteken"
 			}
 		},
 		"variables": {
