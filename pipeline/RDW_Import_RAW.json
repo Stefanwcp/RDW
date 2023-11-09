@@ -7,7 +7,26 @@
 				"type": "Copy",
 				"state": "Inactive",
 				"onInactiveMarkAs": "Succeeded",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Set Raw Folder name",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set Defined Folder name",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set File Name",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -59,15 +78,28 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "DelimitedText1",
-						"type": "DatasetReference"
+						"referenceName": "DS_RDW_Raw",
+						"type": "DatasetReference",
+						"parameters": {
+							"folder": {
+								"value": "@variables('RawFolder')",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			},
 			{
 				"name": "Set Timestamp for file",
 				"type": "SetVariable",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Get X-App-Token for RDW data",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"secureOutput": false,
 					"secureInput": false
@@ -77,6 +109,105 @@
 					"variableName": "TimestampForFile",
 					"value": {
 						"value": "@formatDateTime(utcNow(),'yyyy-MM-dd hh:mm:ss')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set Defined Folder name",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Set Run ID",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": []
+			},
+			{
+				"name": "Set Raw Folder name",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Set Run ID",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": []
+			},
+			{
+				"name": "Set File Name",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Set Run ID",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "FileName",
+					"value": ""
+				}
+			},
+			{
+				"name": "Get X-App-Token for RDW data",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": true,
+					"secureInput": true
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://rdw-dev.vault.azure.net/",
+					"method": "GET",
+					"authentication": {
+						"type": "MSI"
+					}
+				}
+			},
+			{
+				"name": "Set Run ID",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Set Timestamp for file",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "RunID",
+					"value": {
+						"value": "@pipeline().RunId",
 						"type": "Expression"
 					}
 				}
@@ -90,6 +221,9 @@
 			"XAppToken": {
 				"type": "string",
 				"defaultValue": "0LK235hN8zkXw8RR62aPNdAVt"
+			},
+			"Entity": {
+				"type": "string"
 			}
 		},
 		"variables": {
@@ -100,6 +234,12 @@
 				"type": "String"
 			},
 			"RawFolder": {
+				"type": "String"
+			},
+			"FileName": {
+				"type": "String"
+			},
+			"RunID": {
 				"type": "String"
 			}
 		},
