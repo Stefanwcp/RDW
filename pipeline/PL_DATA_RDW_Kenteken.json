@@ -202,7 +202,10 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"url": "https://rdw-dev.vault.azure.net/secrets/RDW-X-App-Token/e7eca6865c66414fab63c5db5a611609",
+					"url": {
+						"value": "@concat('https://rdw-dev.vault.azure.net/secrets/RDW-X-App-Token/e7eca6865c66414fab63c5db5a611609','?api-version=7.0')",
+						"type": "Expression"
+					},
 					"method": "GET",
 					"authentication": {
 						"type": "MSI",
