@@ -242,10 +242,6 @@
 				"type": "string",
 				"defaultValue": "m9d7-ebf2.json"
 			},
-			"XAppToken": {
-				"type": "string",
-				"defaultValue": "0LK235hN8zkXw8RR62aPNdAVt"
-			},
 			"Entity": {
 				"type": "string",
 				"defaultValue": "kenteken"
