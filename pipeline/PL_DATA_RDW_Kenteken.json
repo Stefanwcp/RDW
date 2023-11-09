@@ -135,7 +135,7 @@
 				"typeProperties": {
 					"variableName": "DefinedFolder",
 					"value": {
-						"value": "@concat(pipeline().parameters.Entity,variables('TimestampForFile'))",
+						"value": "@concat(pipeline().parameters.Entity,'-',variables('TimestampForFile'))",
 						"type": "Expression"
 					}
 				}
@@ -159,7 +159,7 @@
 				"typeProperties": {
 					"variableName": "RawFolder",
 					"value": {
-						"value": "@concat(pipeline().parameters.Entity,variables('TimestampForFile'))",
+						"value": "@concat(pipeline().parameters.Entity,'-',variables('TimestampForFile'))",
 						"type": "Expression"
 					}
 				}
@@ -183,7 +183,7 @@
 				"typeProperties": {
 					"variableName": "FileName",
 					"value": {
-						"value": "@concat(pipeline().parameters.Entity,variables('TimestampForFile'),variables('RunID'))",
+						"value": "@concat(pipeline().parameters.Entity,'-',variables('TimestampForFile'),'-',variables('RunID'))",
 						"type": "Expression"
 					}
 				}
