@@ -1,5 +1,5 @@
 {
-	"name": "DS_ADLS_RDW_raw",
+	"name": "DS_ADLS_Raw_Parquet",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ADLS_RDW",

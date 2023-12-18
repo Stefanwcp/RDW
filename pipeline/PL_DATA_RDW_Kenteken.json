@@ -63,7 +63,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "RDW_Raw_JSON",
+						"referenceName": "DS_API_Raw_JSON",
 						"type": "DatasetReference",
 						"parameters": {
 							"RelativeUrl": {
@@ -75,7 +75,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "DS_ADLS_RDW_raw",
+						"referenceName": "DS_ADLS_Raw_Parquet",
 						"type": "DatasetReference",
 						"parameters": {
 							"Folder": {

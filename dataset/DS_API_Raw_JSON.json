@@ -1,5 +1,5 @@
 {
-	"name": "RDW_Raw_JSON",
+	"name": "DS_API_Raw_JSON",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "HTTP_RDW",
