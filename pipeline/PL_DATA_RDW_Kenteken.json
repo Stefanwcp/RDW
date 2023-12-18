@@ -50,15 +50,13 @@
 						}
 					},
 					"sink": {
-						"type": "DelimitedTextSink",
+						"type": "ParquetSink",
 						"storeSettings": {
 							"type": "AzureBlobFSWriteSettings",
 							"copyBehavior": "MergeFiles"
 						},
 						"formatSettings": {
-							"type": "DelimitedTextWriteSettings",
-							"quoteAllText": true,
-							"fileExtension": ".txt"
+							"type": "ParquetWriteSettings"
 						}
 					},
 					"enableStaging": false
@@ -77,15 +75,15 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "DS_RDW_Raw",
+						"referenceName": "DS_ADLS_RDW_raw",
 						"type": "DatasetReference",
 						"parameters": {
-							"folder": {
+							"Folder": {
 								"value": "@variables('RawFolder')",
 								"type": "Expression"
 							},
-							"file": {
-								"value": "@variables('FileName')",
+							"File": {
+								"value": "@concat(variables('FileName'),'.parquet')",
 								"type": "Expression"
 							}
 						}
@@ -183,7 +181,7 @@
 				"typeProperties": {
 					"variableName": "FileName",
 					"value": {
-						"value": "@concat(pipeline().parameters.Entity,'-',variables('TimestampForFile'),'-',variables('RunID'),'.parquet')",
+						"value": "@concat(pipeline().parameters.Entity,'-',variables('TimestampForFile'),'-',variables('RunID'))",
 						"type": "Expression"
 					}
 				}
@@ -245,6 +243,9 @@
 			"Entity": {
 				"type": "string",
 				"defaultValue": "kenteken"
+			},
+			"ApiQuery": {
+				"type": "string"
 			}
 		},
 		"variables": {
