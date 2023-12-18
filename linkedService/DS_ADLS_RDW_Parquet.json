@@ -1,0 +1,10 @@
+{
+	"name": "DS_ADLS_RDW_Parquet",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://datalakestoragegenrdwdev.dfs.core.windows.net/"
+		}
+	}
+}
