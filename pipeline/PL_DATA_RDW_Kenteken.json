@@ -316,7 +316,7 @@
 						"Accept": "*/*",
 						"Content-Type": "application/json",
 						"Authorization": {
-							"value": "@concat('Basic ',base64ToString(concat(activity('Get User for RDW data').output,':',activity('Get Pass for RDW data').output)))",
+							"value": "@concat('Basic ',base64ToString(concat(activity('Get User for RDW data').output.value,':',activity('Get Pass for RDW data').output.value)))",
 							"type": "Expression"
 						}
 					},
@@ -357,8 +357,8 @@
 					"timeout": "0.12:00:00",
 					"retry": 0,
 					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
+					"secureOutput": true,
+					"secureInput": true
 				},
 				"userProperties": [],
 				"typeProperties": {
