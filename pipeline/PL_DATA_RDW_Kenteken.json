@@ -188,7 +188,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"variableName": "RowCount",
-					"value": "0"
+					"value": 0
 				}
 			},
 			{
@@ -217,27 +217,11 @@
 					},
 					"method": "GET",
 					"headers": {
-						"X-App-Token": {
-							"value": "@activity('Get X-App-Token for RDW data').output.value",
-							"type": "Expression"
-						},
 						"Accept": "*/*",
 						"Content-Type": "application/json"
 					},
 					"authentication": {
-						"type": "Basic",
-						"username": {
-							"value": "@activity('Get User for RDW data').output.value",
-							"type": "Expression"
-						},
-						"password": {
-							"type": "AzureKeyVaultSecret",
-							"store": {
-								"referenceName": "LS_AKV_dev_RDW",
-								"type": "LinkedServiceReference"
-							},
-							"secretName": "BasicAuthorizationPass"
-						}
+						"type": "MSI"
 					}
 				}
 			},
@@ -260,7 +244,7 @@
 				"typeProperties": {
 					"variableName": "RowCount",
 					"value": {
-						"value": "@take(activity('Total RowCount').output.Response.count,1)",
+						"value": "@json(activity('Total RowCount').output.Response)[0].count",
 						"type": "Expression"
 					}
 				}
@@ -312,6 +296,98 @@
 						"resource": "https://vault.azure.net"
 					}
 				}
+			},
+			{
+				"name": "Fetch RDW CSV",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "TotalRowCount",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": true,
+					"secureInput": true
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "HttpReadSettings",
+							"requestMethod": "GET",
+							"additionalHeaders": {
+								"value": "@{concat('X-App-Token: ',activity('Get X-App-Token for RDW data').output.value)}",
+								"type": "Expression"
+							},
+							"requestTimeout": ""
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings",
+							"copyBehavior": "MergeFiles"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_API_Raw_JSON",
+						"type": "DatasetReference",
+						"parameters": {
+							"RelativeUrl": {
+								"value": "@pipeline().parameters.DatasetIdentifier",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_ADLS_Raw_Parquet",
+						"type": "DatasetReference",
+						"parameters": {
+							"Folder": {
+								"value": "@variables('RawFolder')",
+								"type": "Expression"
+							},
+							"File": {
+								"value": "@concat(variables('FileName'),'.parquet')",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			},
+			{
+				"name": "Until1",
+				"type": "Until",
+				"dependsOn": [
+					{
+						"activity": "Fetch RDW CSV",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"timeout": "0.12:00:00"
+				}
 			}
 		],
 		"parameters": {
@@ -344,7 +420,7 @@
 				"type": "String"
 			},
 			"RowCount": {
-				"type": "String"
+				"type": "Integer"
 			}
 		},
 		"folder": {
