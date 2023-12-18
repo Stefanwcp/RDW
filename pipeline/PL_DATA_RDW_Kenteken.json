@@ -5,26 +5,7 @@
 			{
 				"name": "Fetch RDW CSV",
 				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "Set Raw Folder name",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "Set Defined Folder name",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "Set File Name",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -233,6 +214,48 @@
 						"type": "Expression"
 					}
 				}
+			},
+			{
+				"name": "Until1",
+				"type": "Until",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"timeout": "0.12:00:00"
+				}
+			},
+			{
+				"name": "Init RowCount",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Set Defined Folder name",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set Raw Folder name",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set File Name",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "RowCount",
+					"value": 0
+				}
 			}
 		],
 		"parameters": {
@@ -263,6 +286,9 @@
 			},
 			"RunID": {
 				"type": "String"
+			},
+			"RowCount": {
+				"type": "Integer"
 			}
 		},
 		"folder": {
