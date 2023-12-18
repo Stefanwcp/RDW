@@ -5,7 +5,14 @@
 			{
 				"name": "Fetch RDW CSV",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "TotalRowCount",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -77,6 +84,18 @@
 				"dependsOn": [
 					{
 						"activity": "Get X-App-Token for RDW data",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Get User for RDW data",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Get Pass for RDW data",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -218,7 +237,14 @@
 			{
 				"name": "Until1",
 				"type": "Until",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Fetch RDW CSV",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"userProperties": [],
 				"typeProperties": {
 					"timeout": "0.12:00:00"
@@ -255,6 +281,120 @@
 				"typeProperties": {
 					"variableName": "RowCount",
 					"value": 0
+				}
+			},
+			{
+				"name": "Total RowCount",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Init RowCount",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@concat('https://opendata.rdw.nl/resource/',pipeline().parameters.DatasetIdentifier,'?$select=count(*)')",
+						"type": "Expression"
+					},
+					"method": "GET",
+					"headers": {
+						"X-App-Token": {
+							"value": "@activity('Get X-App-Token for RDW data').output.value",
+							"type": "Expression"
+						},
+						"Accept": "*/*",
+						"Content-Type": "application/json",
+						"Authorization": {
+							"value": "@concat('Basic ',base64ToString(concat(activity('Get User for RDW data').output,':',activity('Get Pass for RDW data').output)))",
+							"type": "Expression"
+						}
+					},
+					"authentication": {
+						"type": "Basic"
+					}
+				}
+			},
+			{
+				"name": "TotalRowCount",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Total RowCount",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "RowCount",
+					"value": {
+						"value": "@take(activity('Total RowCount').output.Response,1)",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Get User for RDW data",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@concat('https://rdw-dev.vault.azure.net/secrets/BasicAuthorizationUser/c8016f7fdf8843d1a3a52d1c24ea05f1','?api-version=7.0')",
+						"type": "Expression"
+					},
+					"method": "GET",
+					"authentication": {
+						"type": "MSI",
+						"resource": "https://vault.azure.net"
+					}
+				}
+			},
+			{
+				"name": "Get Pass for RDW data",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": true,
+					"secureInput": true
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@concat('https://rdw-dev.vault.azure.net/secrets/BasicAuthorizationPass/a60afb4c6a20467fa6b80f57786fa742','?api-version=7.0')",
+						"type": "Expression"
+					},
+					"method": "GET",
+					"authentication": {
+						"type": "MSI",
+						"resource": "https://vault.azure.net"
+					}
 				}
 			}
 		],
